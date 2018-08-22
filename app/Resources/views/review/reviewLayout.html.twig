@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebarmenu %}
+    <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+    <ul class="list-unstyled">
+        <li><a href="{{ path('homepage') }}"> <i class="icon-home"></i>Home </a></li>
+        <li><a href="{{ path('product_list') }}"> <i class="icon-flask"></i>Products </a></li>
+        <li class="active"><a href="{{ path('review_main') }}"> <i class="fa fa-bar-chart"></i>Reviews </a></li>
+        {#<li><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>#}
+    </ul>
+{% endblock %}

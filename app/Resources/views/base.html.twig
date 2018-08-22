@@ -1,13 +1,157 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Review System{% endblock %}</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+
+    {% block stylesheets %}
+        <!-- Bootstrap CSS-->
+        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+        <!-- Font Awesome CSS-->
+        <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
+        <!-- Fontastic Custom icon font-->
+        <link rel="stylesheet" href="{{ asset('css/fontastic.css') }}">
+        <!-- Google fonts - Poppins -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+        <!-- theme stylesheet-->
+        <link rel="stylesheet" href="{{ asset('css/style.default.css') }}" id="theme-stylesheet">
+        <!-- Custom stylesheet - for your changes-->
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        <!-- Favicon-->
+        <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/vnd.microsoft.icon">
+        <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+    {% endblock %}
+</head>
+<body>
+
+{% block page %}
+
+<div class="page">
+
+    {% block header %}
+    <!-- Main Navbar-->
+    <header class="header">
+        <nav class="navbar">
+
+            <div class="container-fluid">
+                <div class="navbar-holder d-flex align-items-center justify-content-between">
+                    <!-- Navbar Header-->
+                    <div class="navbar-header">
+                        <!-- Navbar Brand --><a href="{{ path('homepage') }}" class="navbar-brand d-none d-sm-inline-block">
+                            <div class="brand-text d-none d-lg-inline-block"><strong>Review System</strong></div>
+                            <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>RS</strong></div></a>
+                        <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                    </div>
+                    <!-- Navbar Menu -->
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                        {% block headerbtns %}
+                        <!-- Logout    -->
+                        <li class="nav-item"><a href="{{ path('fos_user_security_logout') }}" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                        {% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    {% endblock %}
+
+    <div class="page-content d-flex align-items-stretch">
+
+        {% block sidebar %}
+        <!-- Side Navbar -->
+        <nav class="side-navbar">
+            <!-- Sidebar Header-->
+            <div class="sidebar-header d-flex align-items-center">
+                <div class="avatar"><img src="{{ asset('img/avatar-1.jpg') }}" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                    <h1 class="h4">{{ app.user.username }}</h1>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <p>Admin</p>
+                    {% else %}
+                        <p>User</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% block sidebarmenu %}
+            <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+            <ul class="list-unstyled">
+                <li class="active"><a href="{{ path('homepage') }}"> <i class="icon-home"></i>Home </a></li>
+                <li><a href="{{ path('product_list') }}"> <i class="icon-flask"></i>Products </a></li>
+                <li><a href="{{ path('review_main') }}"> <i class="fa fa-bar-chart"></i>Reviews </a></li>
+                {#<li><a href="forms.html"> <i class="icon-padnote"></i>Forms </a></li>#}
+            </ul>
+            {% endblock %}
+        </nav>
+        {% endblock %}
+
+
+        <div class="content-inner">
+
+            {% block pageheader %}
+            <!-- Page Header-->
+            <header class="page-header">
+                <div class="container-fluid">
+                    <h2 class="no-margin-bottom">Dashboard</h2>
+                </div>
+            </header>
+
+            {% endblock %}
+
+            {% for msg in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+            {% for msg in app.session.flashBag.get('failure') %}
+                <div class="alert alert-danger">
+                    {{ msg }}
+                </div>
+            {% endfor %}
+            {% block body %}{% endblock %}
+
+            {% block footer %}
+            <!-- Page Footer-->
+            <footer class="main-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12 text-sm-center">
+                            <p>Coeus Solutions &copy; 2018</p>
+                        </div>
+
+                    </div>
+                </div>
+            </footer>
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<!-- JavaScript files-->
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/popper.js/umd/popper.min.js') }}"> </script>
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery.cookie/jquery.cookie.js') }}"> </script>
+<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/charts-home.js') }}"></script>
+<!-- Main File-->
+<script src="{{ asset('js/front.js') }}"></script>
+{% endblock %}
+
+</body>
 </html>

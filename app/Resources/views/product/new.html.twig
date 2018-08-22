@@ -1,0 +1,41 @@
+{% extends 'product/prodLayout.html.twig' %}
+
+{% block pageheader %}
+    <!-- Page Header-->
+    <header class="page-header">
+        <div class="container-fluid">
+            <h2 class="no-margin-bottom">Products</h2>
+        </div>
+    </header>
+    <!-- Breadcrumb-->
+    <div class="breadcrumb-holder container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('homepage') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('product_list') }}">Products</a></li>
+            <li class="breadcrumb-item active">New</li>
+        </ul>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <section class="forms">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Basic Form-->
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h3 class="h4">New Product</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Add new product here!</p>
+                            {{ include('product/_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+AppBundle\Entity\User:
+    user_{1..10}:
+        email: <email()>
+        username: admin<current()>
+        plainPassword: test
+        roles: ['ROLE_ADMIN']
+        enabled: 1
+
+    seller_{1..10}:
+        email: <email()>
+        username: test<current()>
+        plainPassword: test
+        enabled: 1
+
+
+AppBundle\Entity\Shop:
+    shop_{1..10}:
+        name: shop<current()>
+        description: <paragraph()>
+        address: <numberBetween(1, 100)>A, Some City, Some Country
+        user: '@seller_<current()>'
+
+AppBundle\Entity\Product:
+    prod_{1..10}:
+        name: Product<current()>
+        description: <paragraph()>
+        price: <numberBetween(1000,100000)>
+        shop: '@shop_*'
+
+AppBundle\Entity\Review:
+    review_{1..10}:
+        customerName: <name()>
+        comment: <sentence()>
+        rating: <numberBetween(1,6)>
+        product: '@prod_*'

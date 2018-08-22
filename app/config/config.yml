@@ -7,10 +7,12 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    images_directory: '%kernel.project_dir%/web/uploads/images'
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
+#    translator: ~
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -30,6 +32,8 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
@@ -69,3 +73,56 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+
+easy_admin:
+    list:
+        actions: ['show', 'edit', 'delete', 'new', 'search', ]
+    entities:
+        User:
+            class: AppBundle\Entity\User
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    - lastLogin
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - roles
+            new:
+                fields:
+                    - { property: 'plainPassword', type_options: { required: true} }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'User': 'ROLE_USER', 'Admin': 'ROLE_ADMIN' } } }
+
+        Product:
+            class: AppBundle\Entity\Product
+
+        Shop:
+            class: AppBundle\Entity\Shop
+            form:
+                fields:
+                    - name
+                    - description
+                    - address
+                    - user
+
+        Review:
+            class: AppBundle\Entity\Review
+
+    site_name: 'Review System'
+    design:
+        menu:
+            - { label: 'Site Homepage', url: '/' }
+            - User
+            - Shop
+            - Product
+            - Review

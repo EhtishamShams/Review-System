@@ -39,3 +39,14 @@ monolog:
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
+swiftmailer:
+    delivery_address: bagakifati@hubii-network.com
+    transport: gmail
+    host:      '%mailer_host%'
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
+    delivery_whitelist:
+        # all email addresses matching these regexes will be delivered
+        # like normal, as well as being sent to the above delivery address
+        - '/@specialdomain\.com$/'
+        - '/^admin@mydomain\.com$/'

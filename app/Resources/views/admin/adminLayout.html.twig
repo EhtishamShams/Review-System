@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebarmenu %}
+        <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+        <ul class="list-unstyled">
+            <li class="active"><a href="{{ path('homepage') }}"> <i class="icon-home"></i>Home </a></li>
+        </ul>
+
+{% endblock %}
+
+{% block headerbtns %}
+    <li class="nav-item"><a href="{{ path('admin') }}" class="nav-link logout"> <span class="d-none d-sm-inline">Admin Panel</span><i class="fa fa-user"></i></a></li>
+    {{ parent() }}
+{% endblock %}

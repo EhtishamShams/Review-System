@@ -1,0 +1,64 @@
+
+{{ form_start(productForm, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {{ form_errors(productForm) }}
+
+    <div class="form-group row">
+        {{ form_label(productForm.name, null, {
+            label_attr: {class: 'col-sm-3 form-control-label'}
+        }) }}
+        <div class="col-sm-9">
+        {{ form_widget(productForm.name, {
+            attr: {class: 'form-control', placeholder:'Product Name'}
+        }) }}
+        </div>
+        {{ form_errors(productForm.name) }}
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(productForm.price, null, {
+            label_attr: {class: 'col-sm-3 form-control-label'}
+        }) }}
+        <div class="col-sm-9">
+            {{ form_widget(productForm.price, {
+                attr: {class: 'form-control', placeholder:'Price'}
+            }) }}
+        </div>
+        {{ form_errors(productForm.price) }}
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(productForm.description, null, {
+            label_attr: {class: 'col-sm-3 form-control-label'}
+        }) }}
+        <div class="col-sm-9">
+            {{ form_widget(productForm.description, {
+                attr: {class: 'form-control', placeholder:'Some Pretty Description Here!'}
+            }) }}
+        </div>
+        {{ form_errors(productForm.description) }}
+    </div>
+
+
+<div class="form-group row">
+    {#{{ form_row(productForm.picPath) }}#}
+    {{ form_label(productForm.picPath, 'Image', {
+        label_attr: {class: 'col-sm-3 form-control-label'}
+    }) }}
+    <div class="col-sm-9">
+        {{ form_widget(productForm.picPath) }}
+    </div>
+    {{ form_errors(productForm.picPath) }}
+</div>
+
+    {#{{ form_row(productForm.name) }}#}
+    {#{{ form_row(productForm.price) }}#}
+    {#{{ form_row(productForm.description) }}#}
+
+    <div class="form-group row">
+        <div class="col-sm-9 offset-sm-3">
+            <button type="submit" class="btn btn-primary" formnovalidate>Save</button>
+        </div>
+    </div>
+
+{{ form_end(productForm) }}

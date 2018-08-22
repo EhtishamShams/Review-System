@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+
+{% block page %}
+    <div class="page">
+
+        {% block header %}
+            <!-- Main Navbar-->
+            <header class="header">
+                <nav class="navbar">
+
+                    <div class="container-fluid">
+                        <div class="navbar-holder d-flex align-items-center justify-content-between">
+                            <!-- Navbar Header-->
+                            <div class="navbar-header">
+                                <!-- Navbar Brand --><a href="#"
+                                                        class="navbar-brand d-none d-sm-inline-block">
+                                    <div class="brand-text d-none d-lg-inline-block"><strong>Review System</strong>
+                                    </div>
+                                    <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>RS</strong></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+        {% endblock %}
+
+        <div class="page-content d-flex align-items-stretch">
+
+            <nav class="side-navbar">
+                <ul class="list-unstyled">
+                    <li class="active"><a href="#"> <i class="fa fa-pencil"></i>Feedback </a></li>
+                </ul>
+            </nav>
+
+            <div class="content-inner">
+                {% block body %}{% endblock %}
+
+                {% block footer %}
+                    <!-- Page Footer-->
+                    <footer class="main-footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12 text-sm-center">
+                                    <p>Coeus Solutions &copy; 2018</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </footer>
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
