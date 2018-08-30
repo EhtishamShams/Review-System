@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: en
     images_directory: '%kernel.project_dir%/web/uploads/images'
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 
 framework:
     #esi: ~
@@ -126,3 +127,18 @@ easy_admin:
             - Shop
             - Product
             - Review
+
+fos_oauth_server:
+    db_driver: orm       # Drivers available: orm, mongodb, or propel
+    client_class:        AppBundle\Entity\Client
+    access_token_class:  AppBundle\Entity\AccessToken
+    refresh_token_class: AppBundle\Entity\RefreshToken
+    auth_code_class:     AppBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
+
+lexik_jwt_authentication:
+    secret_key:       '%kernel.project_dir%/config/jwt/private.pem' # required for token creation
+    public_key:       '%kernel.project_dir%/config/jwt/public.pem'  # required for token verification
+    pass_phrase:      'review' # required for token creation, usage of an environment variable is recommended
+    token_ttl:        3600

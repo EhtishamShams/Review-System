@@ -10,9 +10,11 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @Serializer\ExclusionPolicy("all")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  * @ORM\Table(name="product")
  */
@@ -26,18 +28,21 @@ class Product
     private $id;
 
     /**
+     * @Serializer\Expose()
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
     private $name;
 
     /**
+     * @Serializer\Expose()
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
     private $description;
 
     /**
+     * @Serializer\Expose()
      * @ORM\Column(type="decimal")
      * @Assert\NotBlank()
      */
