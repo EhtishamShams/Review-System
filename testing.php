@@ -40,7 +40,7 @@ $resp = $client->post('/api/tokens', [
     'auth' => ['test4', 'test']
 ]);
 
-//echo $resp."\n\n";die;
+echo $resp."\n\n";die;
 $resArr = json_decode($resp->getBody(), true);
 
 $token = $resArr['access_token'];

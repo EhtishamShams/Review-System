@@ -1,4 +1,4 @@
-review_system
+Review System
 =============
 
-A Symfony project created on August 15, 2018, 7:50 am.
+Review System based on Symfony 3.4.
